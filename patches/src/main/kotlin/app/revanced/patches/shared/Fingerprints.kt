@@ -8,5 +8,5 @@ internal val castContextFetchFingerprint = fingerprint {
 }
 
 internal val primeMethodFingerprint = fingerprint {
-    strings("com.android.vending", "com.android.vending")
+    strings("com.google.android.gms", "com.android.vending")
 }
