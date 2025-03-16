@@ -159,19 +159,49 @@ fun gmsCoreSupportPatch(
         }
 
         fun transformPrimeMethod(packageName: String) {
-            primeMethodFingerprint!!.method.apply {
+            // primeMethodFingerprint が null でないことを確認
+            if (primeMethodFingerprint == null) {
+                println("primeMethodFingerprint is null. Skipping transformation.")
+                return
+            }
+
+            // フィンガープリントがメソッドにマッチするか確認
+            if (primeMethodFingerprint.method == null) {
+                println("primeMethodFingerprint did not match any method. Skipping transformation.")
+                return
+            }
+
+            primeMethodFingerprint.method.apply {
                 var register = 2
+
+                // デバッグログ: instructions の内容を出力
+                println("Checking instructions in method: ${this.name}")
+                instructions.forEachIndexed { i, instruction ->
+                    val stringRef = instruction.getReference<StringReference>()
+                    if (stringRef != null) {
+                        println("Instruction $i: ${stringRef.string}")
+                    }
+                }
+
+                // ターゲット命令を検索
                 val index = instructions.indexOfFirst {
-                    if (it.getReference<StringReference>()?.string != fromPackageName) return@indexOfFirst false
+                    val stringRef = it.getReference<StringReference>()
+                    if (stringRef?.string != fromPackageName) return@indexOfFirst false
 
                     register = (it as OneRegisterInstruction).registerA
                     return@indexOfFirst true
                 }
 
+                // インデックスの有効性を確認
+                if (index == -1) {
+                    println("Failed to find the target instruction in the prime method. fromPackageName: $fromPackageName")
+                    return
+                }
+
+                // 命令を置き換え
                 replaceInstruction(index, "const-string v$register, \"$packageName\"")
             }
         }
-
         // endregion
 
         val packageName = setOrGetFallbackPackageName(toPackageName)
@@ -191,11 +221,23 @@ fun gmsCoreSupportPatch(
         }
 
         // Specific method that needs to be patched.
-        primeMethodFingerprint?.let { transformPrimeMethod(packageName) }
+        // Specific method that needs to be patched.
+        try {
+            primeMethodFingerprint?.let { transformPrimeMethod(packageName) }
+        } catch (e: Exception) {
+            println("Failed to transform prime method: ${e.message}")
+        }
 
         // Return these methods early to prevent the app from crashing.
         earlyReturnFingerprints.forEach { it.method.returnEarly() }
-        serviceCheckFingerprint.method.returnEarly()
+
+        // Specific method that needs to be patched.
+        try {
+            serviceCheckFingerprint.method.returnEarly()
+        } catch (e: Exception) {
+            println("Failed to transform prime method: ${e.message}")
+        }
+
 
         // Google Play Utility is not present in all apps, so we need to check if it's present.
 
