@@ -23,7 +23,7 @@ val gmsCoreSupportPatch = gmsCoreSupportPatch(
         castContextFetchFingerprint
     ),
     mainActivityOnCreateFingerprint = MainActivityFingerprint,
-    extensionPatch = extensionPatch, // Corrected to use the right extension patch
+    extensionPatch = extensionPatch,
     gmsCoreSupportResourcePatchFactory = ::lineGmsCoreSupportResourcePatch,
 ) {
     compatibleWith(LineConstants.PACKAGE_NAME)
@@ -34,6 +34,6 @@ private fun lineGmsCoreSupportResourcePatch(
 ) = app.revanced.patches.shared.misc.gms.gmsCoreSupportResourcePatch(
     fromPackageName = LineConstants.PACKAGE_NAME,
     toPackageName = LineConstants.SPOOFED_PACKAGE,
-    spoofedPackageSignature = LineConstants.MICROG_SIGNATURE, // Using MICROG_SIGNATURE for spoofing
+    spoofedPackageSignature = LineConstants.MICROG_SIGNATURE,
     gmsCoreVendorGroupIdOption = gmsCoreVendorGroupIdOption,
 )
