@@ -105,7 +105,10 @@ class ExtensionHook internal constructor(
             insertIndex,
             "invoke-static/range { $contextRegister .. $contextRegister }, " +
                 "$extensionClassDescriptor->setContext(Landroid/content/Context;)V",
+
+
         )
+        println("Checking MainActivityFingerprint")
     }
 }
 
