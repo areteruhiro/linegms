@@ -26,7 +26,6 @@ import java.net.URL;
 public class GmsCoreSupport {
     private static final String PACKAGE_NAME_YOUTUBE = "com.google.android.youtube";
     private static final String PACKAGE_NAME_YOUTUBE_MUSIC = "com.google.android.apps.youtube.music";
-    private static final String PACKAGE_NAME_LINE = "jp.naver.line.android";
 
     private static final String GMS_CORE_PACKAGE_NAME
             = getGmsCoreVendorGroupId() + ".android.gms";
@@ -81,7 +80,7 @@ public class GmsCoreSupport {
             // GmsCore Support changes the package name, but with a mounted installation
             // all manifest changes are ignored and the original package name is used.
             String packageName = context.getPackageName();
-            if (packageName.equals(PACKAGE_NAME_YOUTUBE) || packageName.equals(PACKAGE_NAME_YOUTUBE_MUSIC)|| packageName.equals(PACKAGE_NAME_LINE)) {
+            if (packageName.equals(PACKAGE_NAME_YOUTUBE) || packageName.equals(PACKAGE_NAME_YOUTUBE_MUSIC)) {
                 Logger.printInfo(() -> "App is mounted with root, but GmsCore patch was included");
                 // Cannot use localize text here, since the app will load
                 // resources from the unpatched app and all patch strings are missing.
