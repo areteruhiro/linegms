@@ -33,13 +33,13 @@ jobs:
       - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew :patches:buildAndroid clean
+        run: ./gradlew :patches:buildAndroid
 
       - name: Upload rvp artifact
         uses: actions/upload-artifact@v4
         with:
           name: android-artifacts
-          path: patches/build/libs/*.rvp  
+          path: patches/build/libs  
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
