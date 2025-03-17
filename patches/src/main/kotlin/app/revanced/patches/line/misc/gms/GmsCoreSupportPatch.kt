@@ -7,9 +7,6 @@ import app.revanced.patches.shared.castContextFetchFingerprint
 import app.revanced.patches.shared.misc.gms.gmsCoreSupportPatch
 import app.revanced.patches.shared.primeMethodFingerprint
 
-internal object LineConstants {
-    const val MICROG_SIGNATURE = "1be388ce61a43b6a0b60b42928b6cbe0d83b46a8e873aa193e25f0a589d230c8"
-}
 
 @Suppress("unused")
 val gmsCoreSupportPatch = gmsCoreSupportPatch(
@@ -31,6 +28,6 @@ private fun lineGmsCoreSupportResourcePatch(
 ) = app.revanced.patches.shared.misc.gms.gmsCoreSupportResourcePatch(
     fromPackageName = Constants.LINE_PACKAGE_NAME,
     toPackageName = Constants.REVANCED_LINE_PACKAGE_NAME,
-    spoofedPackageSignature = LineConstants.MICROG_SIGNATURE,
+    spoofedPackageSignature = "89396dc419292473972813922867e6973d6f5c50",
     gmsCoreVendorGroupIdOption = gmsCoreVendorGroupIdOption,
 )
