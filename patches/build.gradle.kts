@@ -5,7 +5,7 @@ patches {
         name = "a"
         description = "Patches for ReVanced"
         source = "git@github.com:revanced/revanced-patches.git"
-        author = "areteruhro"
+        author = "LIMEs"
         contact = "contact@revanced.app"
         website = "https://your.homepage"
         license = "GNU General Public License v3.0"
@@ -63,7 +63,7 @@ publishing {
                 developers {
                     developer {
                         id = "Your ID"
-                        name = "LIME"
+                        name = "LIMEs"
                         email = "contact@your.homepage"
                     }
                 }
