@@ -3,7 +3,7 @@ package app.revanced.patches.shared
 import app.revanced.patcher.fingerprint
 
 internal val castContextFetchFingerprint = fingerprint {
-    strings("Error fetching PackageInfo.")
+    strings("Error fetching PackageInfo")
 }
 
 internal val primeMethodFingerprint = fingerprint {

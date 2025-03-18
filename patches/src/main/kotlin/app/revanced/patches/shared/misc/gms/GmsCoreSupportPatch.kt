@@ -220,8 +220,7 @@ fun gmsCoreSupportPatch(
             return@transform null
         }
 
-        // Specific method that needs to be patched.
-        // Specific method that needs to be patched.
+
         try {
             primeMethodFingerprint?.let { transformPrimeMethod(packageName) }
         } catch (e: Exception) {
@@ -230,17 +229,9 @@ fun gmsCoreSupportPatch(
 
         // Return these methods early to prevent the app from crashing.
         earlyReturnFingerprints.forEach { it.method.returnEarly() }
-
-        // Specific method that needs to be patched.
-        try {
-            serviceCheckFingerprint.method.returnEarly()
-        } catch (e: Exception) {
-            println("Failed to transform prime method: ${e.message}")
-        }
-
+      serviceCheckFingerprint.method.returnEarly()
 
         // Google Play Utility is not present in all apps, so we need to check if it's present.
-
         // Verify GmsCore is installed and whitelisted for power optimizations and background usage.
         mainActivityOnCreateFingerprint.method.apply {
             // Temporary fix for patches with an extension patch that hook the onCreate method as well.
