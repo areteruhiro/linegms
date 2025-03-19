@@ -226,9 +226,12 @@ fun gmsCoreSupportPatch(
         } catch (e: Exception) {
             println("Failed to transform prime method: ${e.message}")
         }
-
+        try {
         // Return these methods early to prevent the app from crashing.
         earlyReturnFingerprints.forEach { it.method.returnEarly() }
+        } catch (e: Exception) {
+            println("earlyReturnFingerprints: ${e.message}")
+        }
       serviceCheckFingerprint.method.returnEarly()
 
         // Google Play Utility is not present in all apps, so we need to check if it's present.
