@@ -48,7 +48,6 @@ jobs:
           name: android-artifacts
           path: patches/build/libs/**/*
 
-
       - name: Upload to GitHub Release (softprops)
         uses: softprops/action-gh-release@v2
         if: github.event.inputs.release == 'true'
@@ -65,7 +64,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "lts/*"
-          cache: 'npm'
+          cache: npm
 
       - name: Install dependencies
         run: npm install
