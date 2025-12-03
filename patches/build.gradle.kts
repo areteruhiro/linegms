@@ -1,13 +1,13 @@
-group = "app.revanced"
+group = "areteruhiro"
 
 patches {
     about {
-        name = "ReVanced Patches"
+        name = "a"
         description = "Patches for ReVanced"
         source = "git@github.com:revanced/revanced-patches.git"
-        author = "ReVanced"
+        author = "LIMEs"
         contact = "contact@revanced.app"
-        website = "https://revanced.app"
+        website = "https://your.homepage"
         license = "GNU General Public License v3.0"
     }
 }
@@ -48,13 +48,33 @@ kotlin {
 }
 
 publishing {
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/revanced/revanced-patches")
-            credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+    publications {
+        create<MavenPublication>("revanced-patches-publication") {
+            from(components["java"])
+
+            pom {
+                name = "LIMEs"
+                description = "Patches for ReVanced."
+                url = "https://your.homepage"
+
+                licenses {
+                    license {
+                        name = "GNU General Public License v3.0"
+                        url = "https://www.gnu.org/licenses/gpl-3.0.en.html"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "Your ID"
+                        name = "LIMEs"
+                        email = "contact@your.homepage"
+                    }
+                }
+                scm {
+                    connection = "scm:git:git://github.com/areteruhiro/revanced-patches.git"
+                    developerConnection = "scm:git:git@github.com:areteruhiro/revanced-patches.git"
+                    url = "https://github.com/crimera/piko"
+                }
             }
         }
     }
