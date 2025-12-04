@@ -48,7 +48,7 @@ jobs:
           name: android-artifacts
           path: patches/build/libs/**/*
 
-
+      # optional GitHub Release (手動リリース用)
       - name: Upload to GitHub Release (softprops)
         uses: softprops/action-gh-release@v2
         if: github.event.inputs.release == 'true'
@@ -65,17 +65,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "lts/*"
-          cache: 'npm'
+          cache: npm
 
       - name: Install dependencies
         run: npm install
-
-      - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v6
-        with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE }}
-          fingerprint: ${{ vars.GPG_FINGERPRINT }}
 
       - name: Release by semantic-release
         run: npm exec semantic-release
